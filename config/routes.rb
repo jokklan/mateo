@@ -1,9 +1,17 @@
 ExamSimulator::Application.routes.draw do
-  resources :topics
+  root :to => 'categories#index'
 
-
-  resources :categories
-
+  
+  resources :categories do
+    member do
+      get 'draw_topic'
+    end
+    resources :topics do
+      collection do
+        get 'draw'
+      end
+    end
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
